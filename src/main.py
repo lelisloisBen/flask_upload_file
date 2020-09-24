@@ -23,7 +23,7 @@ def hello_world():
 
 
 
-@app.route("/upload", methods=["POST"])
+@app.route("/upload", methods=['POST','PUT'])
 def upload_file():
 
     # body = request.get_json()
