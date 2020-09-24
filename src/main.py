@@ -59,7 +59,7 @@ def upload_file():
 @app.route("/multi", methods=['PUT'])
 def multi_upload_files():
 
-    files = request.files.getlist('files[]')
+    files = request.files['files[]']
 
     myList = []
 
