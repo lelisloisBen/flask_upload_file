@@ -25,12 +25,12 @@ def hello_world():
 @app.route("/upload", methods=["POST"])
 def upload_file():
 
-	# A
-    if "user_file" not in request.files:
-        return "No user_file key in request.files"
+    body = request.get_json()
+	
+    if "the_file" not in body:
+        return "No the_file key in body"
 
-	# B
-    file = request.files["user_file"]
+    file = body["the_file"]
 
     """
         These attributes are also available
@@ -42,11 +42,9 @@ def upload_file():
 
     """
 
-	# C.
     if file.filename == "":
         return "Please select a file"
 
-	# D.
     if file and allowed_file(file.filename):
         file.filename = secure_filename(file.filename)
         output   	  = upload_file_to_s3(file, app.config["S3_BUCKET"])
