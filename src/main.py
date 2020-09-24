@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from utils import APIException
-from werkzeug.security import secure_filename
+from werkzeug.utils import secure_filename
 from .helpers import *
 
 app = Flask(__name__)
