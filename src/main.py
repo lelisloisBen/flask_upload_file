@@ -27,8 +27,8 @@ def upload_file():
 
     body = request.get_json()
 	
-    if "the_file" not in body:
-        return "No the_file key in body"
+    if body is None:
+        raise APIException("You need to specify the request body as a json object", status_code=400)
 
     file = body["the_file"]
 
