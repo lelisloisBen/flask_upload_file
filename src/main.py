@@ -6,7 +6,8 @@ from helpers import *
 
 app = Flask(__name__)
 app.config.from_object("config")
-CORS(app)
+# CORS(app)
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # app.config.from_object("flask_s3_upload.config")
 
@@ -23,7 +24,6 @@ def hello_world():
 
 
 @app.route("/upload", methods=["POST"])
-@cross_origin()
 def upload_file():
 
     body = request.get_json()
