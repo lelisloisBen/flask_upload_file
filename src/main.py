@@ -1,12 +1,18 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from utils import APIException
 from werkzeug.utils import secure_filename
 from helpers import *
 
 app = Flask(__name__)
 app.config.from_object("config")
-CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+myOrigin = "https://samir-upload.herokuapp.com/"
+
+CORS(app, resources={r"/upload": {"origins": myOrigin }}) 
+
+# CORS(app)
 
 # app.config.from_object("flask_s3_upload.config")
 
@@ -23,6 +29,7 @@ def hello_world():
 
 
 @app.route("/upload", methods=["POST"])
+@cross_origin(origin=myOrigin,headers=['Content-Type','Authorization'])
 def upload_file():
 
     body = request.get_json()
