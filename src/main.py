@@ -31,7 +31,7 @@ def upload_file():
     file = body["the_file"]
 
     return jsonify({
-        "msg": file
+        "msg": body
     })
 	
     # if body is None:
