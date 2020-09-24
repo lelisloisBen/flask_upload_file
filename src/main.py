@@ -58,35 +58,33 @@ def upload_file():
 
 @app.route("/multi", methods=['PUT'])
 def multi_upload_files():
-    if request.method == 'PUT':
 
-        files = request.files.getlist('files[]')
+    files = request.files.getlist('files[]')
 
-        if files is None:
-            raise APIException("You need to specify the request body as a json object", status_code=400)
+    if files is None:
+        raise APIException("You need to specify the request body as a json object", status_code=400)
 
-        for file in files:
+    for file in files:
 
-            if file.filename == "":
-                return jsonify({
-                        'received': 'nope its empty',
-                        'msg': 'Please select a file'
-                    })
+        if file.filename == "":
+            return jsonify({
+                    'received': 'nope its empty',
+                    'msg': 'Please select a file'
+                })
 
-            if file and allowed_file(file.filename):
-                file.filename = secure_filename(file.filename)
-                output   	  = upload_file_to_s3(file, app.config["S3_BUCKET"])
-                return jsonify({
-                        'received': 'uploaded successfuly',
-                        'msg': str(output)
-                    })
-            else:
-                return jsonify({
-                        'received': 'upload failed',
-                        'msg': 'not upoladed, something is wrong!'
-                    })
-                    
-    return jsonify({"msg": "it is not a PUT method"})
+        if file and allowed_file(file.filename):
+            file.filename = secure_filename(file.filename)
+            output   	  = upload_file_to_s3(file, app.config["S3_BUCKET"])
+            return jsonify({
+                    'received': 'uploaded successfuly',
+                    'msg': str(output)
+                })
+        else:
+            return jsonify({
+                    'received': 'upload failed',
+                    'msg': 'not upoladed, something is wrong!'
+                })
+
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
