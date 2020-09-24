@@ -61,10 +61,10 @@ def multi_upload_files():
 
     files = request.files.getlist('files[]')
 
-    # myList = []
+    myList = []
 
-    # for file in files:
-    #     myList.append(file.filename)
+    for i in files:
+        myList.append(i["files[]"].filename)
     
     return jsonify({
         "seemylist": files
