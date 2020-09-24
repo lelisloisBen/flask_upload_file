@@ -72,7 +72,7 @@ def multi_upload_files():
                         'received': 'nope its empty',
                         'msg': 'Please select a file'
                     })
-                    
+
             if file and allowed_file(file.filename):
                 file.filename = secure_filename(file.filename)
                 output   	  = upload_file_to_s3(file, app.config["S3_BUCKET"])
@@ -85,6 +85,7 @@ def multi_upload_files():
                         'received': 'upload failed',
                         'msg': 'not upoladed, something is wrong!'
                     })
+    return jsonify({"msg": "it is not a PUT method"})
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
