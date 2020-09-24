@@ -31,11 +31,7 @@ def upload_file():
     # file = body["the_file"]
     file = request.files['the_file']
 
-    return jsonify({
-        "file_name": file.filename,
-        "filee": file,
-
-    })
+    return str(file.filename)
 	
     # if body is None:
     #     raise APIException("You need to specify the request body as a json object", status_code=400)
