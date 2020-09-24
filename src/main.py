@@ -27,7 +27,12 @@ def upload_file():
 
     body = request.get_json()
 
-    return body["the_file"]
+    file = body["the_file"]
+
+    return jsonify({
+        'received': 'success',
+        'msg': file
+    })
 	
     # if body is None:
     #     raise APIException("You need to specify the request body as a json object", status_code=400)
