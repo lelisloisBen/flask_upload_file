@@ -29,29 +29,33 @@ def upload_file():
     body = request.get_json()
 
     file = body["the_file"]
+
+    return jsonify({
+        "msg": file
+    })
 	
-    if body is None:
-        raise APIException("You need to specify the request body as a json object", status_code=400)
+    # if body is None:
+    #     raise APIException("You need to specify the request body as a json object", status_code=400)
 
-    if file.name == "":
-        return jsonify({
-                'received': 'nope its empty',
-                'msg': 'Please select a file'
-            })
+    # if file.name == "":
+    #     return jsonify({
+    #             'received': 'nope its empty',
+    #             'msg': 'Please select a file'
+    #         })
 
-    if file and allowed_file(file.name):
-        file.name = secure_filename(file.name)
-        output   	  = upload_file_to_s3(file, app.config["S3_BUCKET"])
-        return jsonify({
-                'received': 'uploaded successfuly',
-                'msg': str(output)
-            })
+    # if file and allowed_file(file.name):
+    #     file.name = secure_filename(file.name)
+    #     output   	  = upload_file_to_s3(file, app.config["S3_BUCKET"])
+    #     return jsonify({
+    #             'received': 'uploaded successfuly',
+    #             'msg': str(output)
+    #         })
 
-    else:
-        return jsonify({
-                'received': 'upload failed',
-                'msg': 'not upoladed, something is wrong!'
-            })
+    # else:
+    #     return jsonify({
+    #             'received': 'upload failed',
+    #             'msg': 'not upoladed, something is wrong!'
+    #         })
 
 
 # this only runs if `$ python src/main.py` is executed
