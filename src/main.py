@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config.from_object("config")
 CORS(app)
 
-app.config.from_object("flask_s3_upload.config")
+# app.config.from_object("flask_s3_upload.config")
 
 
 # Handle/serialize errors like a JSON object
