@@ -23,6 +23,7 @@ def hello_world():
 
 
 @app.route("/upload", methods=["POST"])
+@cross_origin()
 def upload_file():
 
     body = request.get_json()
