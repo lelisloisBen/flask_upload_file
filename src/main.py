@@ -28,7 +28,7 @@ def upload_file():
 
     body = request.get_json()
 
-    file = body["the_file"]
+    # file = body["the_file"]
 
     return jsonify({
         "msg": body
