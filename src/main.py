@@ -56,6 +56,30 @@ def upload_file():
                 'msg': 'not upoladed, something is wrong!'
             })
 
+@app.route("/multi", methods=['PUT'])
+def multi_upload_files():
+    if request.method == 'PUT':
+
+        if 'files[]' not in request.files:
+            return jsonify({
+                'received': 'nothing in your file'
+            })
+
+        files = request.files.getlist('files[]')
+
+        for file in files:
+            if file and allowed_file(file.filename):
+                file.filename = secure_filename(file.filename)
+                output   	  = upload_file_to_s3(file, app.config["S3_BUCKET"])
+                return jsonify({
+                        'received': 'uploaded successfuly',
+                        'msg': str(output)
+                    })
+            else:
+                return jsonify({
+                        'received': 'upload failed',
+                        'msg': 'not upoladed, something is wrong!'
+                    })
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
