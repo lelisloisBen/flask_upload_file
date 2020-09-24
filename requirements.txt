@@ -1,3 +1,5 @@
 Flask
 gunicorn
 Flask-Cors
+boto3
+botocore
