@@ -60,14 +60,19 @@ def upload_file():
 def multi_upload_files():
     if request.method == 'PUT':
 
-        if 'files[]' not in request.files:
-            return jsonify({
-                'received': 'nothing in your file'
-            })
-
         files = request.files.getlist('files[]')
 
+        if files is None:
+            raise APIException("You need to specify the request body as a json object", status_code=400)
+
         for file in files:
+
+            if file.filename == "":
+                return jsonify({
+                        'received': 'nope its empty',
+                        'msg': 'Please select a file'
+                    })
+                    
             if file and allowed_file(file.filename):
                 file.filename = secure_filename(file.filename)
                 output   	  = upload_file_to_s3(file, app.config["S3_BUCKET"])
