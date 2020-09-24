@@ -2,10 +2,14 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from utils import APIException
 from werkzeug.security import secure_filename
+from .helpers import *
 
 app = Flask(__name__)
 app.config.from_object("config")
 CORS(app)
+
+app.config.from_object("flask_s3_upload.config")
+
 
 # Handle/serialize errors like a JSON object
 @app.errorhandler(APIException)
@@ -16,9 +20,7 @@ def handle_invalid_usage(error):
 def hello_world():
     return "<div style='text-align: center; background-color: orange'><h1>Backend running...</h1><br/><h3>Welcome back samir</h3><img src='https://media.gettyimages.com/photos/woman-sitting-by-washing-machine-picture-id117852649?s=2048x2048' width='80%' /></div>"
 
-app.config.from_object("flask_s3_upload.config")
 
-from .helpers import *
 
 @app.route("/upload", methods=["POST"])
 def upload_file():
