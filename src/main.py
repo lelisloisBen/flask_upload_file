@@ -26,12 +26,14 @@ def hello_world():
 @app.route("/upload", methods=["POST"])
 def upload_file():
 
-    body = request.get_json()
+    # body = request.get_json()
+    default_name = '0'
+    data = request.form.get('the_file', default_name)
 
     # file = body["the_file"]
 
     return jsonify({
-        "msg": body
+        "msg": data
     })
 	
     # if body is None:
