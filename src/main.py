@@ -27,26 +27,27 @@ def hello_world():
 def upload_file():
 
     # body = request.get_json()
-    default_name = '0'
-    data = request.form.get('the_file', default_name)
 
     # file = body["the_file"]
+    file = request.files['the_file']
 
     return jsonify({
-        "msg": data
+        "file_name": file.filename,
+        "filee": file,
+
     })
 	
     # if body is None:
     #     raise APIException("You need to specify the request body as a json object", status_code=400)
 
-    # if file.name == "":
+    # if file.filename == "":
     #     return jsonify({
     #             'received': 'nope its empty',
     #             'msg': 'Please select a file'
     #         })
 
-    # if file and allowed_file(file.name):
-    #     file.name = secure_filename(file.name)
+    # if file and allowed_file(file.filename):
+    #     file.filename = secure_filename(file.filename)
     #     output   	  = upload_file_to_s3(file, app.config["S3_BUCKET"])
     #     return jsonify({
     #             'received': 'uploaded successfuly',
