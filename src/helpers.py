@@ -7,6 +7,10 @@ s3 = boto3.client(
    aws_secret_access_key=S3_SECRET
 )
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 def upload_file_to_s3(file, bucket_name, acl="public-read"):
 
     """
