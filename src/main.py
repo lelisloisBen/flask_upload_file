@@ -61,8 +61,15 @@ def multi_upload_files():
 
     files = request.files.getlist('files[]')
 
+    myList = []
+
     for file in files:
-        return str(file.filename)
+        myList.append(file.filename)
+    
+    return jsonify({
+        "seemylist": myList
+    })
+
 
 
     # if files is None:
