@@ -1,6 +1,8 @@
 import boto3, botocore
 from config import S3_KEY, S3_SECRET, S3_BUCKET
 
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
 s3 = boto3.client(
    "s3",
    aws_access_key_id=S3_KEY,
