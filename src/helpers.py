@@ -18,10 +18,10 @@ def upload_file_to_s3(file, bucket_name, acl="public-read"):
         s3.upload_fileobj(
             file,
             bucket_name,
-            file.filename,
+            file.name,
             ExtraArgs={
                 "ACL": acl,
-                "ContentType": file.content_type
+                "ContentType": file.type
             }
         )
 

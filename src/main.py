@@ -39,24 +39,14 @@ def upload_file():
     if body is None:
         raise APIException("You need to specify the request body as a json object", status_code=400)
 
-    """
-        These attributes are also available
-
-        file.filename               # The actual name of the file
-        file.content_type
-        file.content_length
-        file.mimetype
-
-    """
-
-    if file.filename == "":
+    if file.name == "":
         return jsonify({
                 'received': 'nope its empty',
                 'msg': 'Please select a file'
             })
 
-    if file and allowed_file(file.filename):
-        file.filename = secure_filename(file.filename)
+    if file and allowed_file(file.name):
+        file.name = secure_filename(file.name)
         output   	  = upload_file_to_s3(file, app.config["S3_BUCKET"])
         return jsonify({
                 'received': 'uploaded successfuly',
