@@ -10,7 +10,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 myOrigin = "https://samir-upload-to-s3.herokuapp.com/"
 
-CORS(app, resources={r"/upload": {"origins": myOrigin }}) 
+cors = CORS(app, resources={r"/upload/*": {"origins": myOrigin }}) 
 
 # CORS(app)
 
