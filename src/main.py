@@ -26,32 +26,34 @@ def hello_world():
 def upload_file():
 
     body = request.get_json()
+
+    return body["the_file"]
 	
-    if body is None:
-        raise APIException("You need to specify the request body as a json object", status_code=400)
+    # if body is None:
+    #     raise APIException("You need to specify the request body as a json object", status_code=400)
 
-    file = body["the_file"]
+    # file = body["the_file"]
 
-    """
-        These attributes are also available
+    # """
+    #     These attributes are also available
 
-        file.filename               # The actual name of the file
-        file.content_type
-        file.content_length
-        file.mimetype
+    #     file.filename               # The actual name of the file
+    #     file.content_type
+    #     file.content_length
+    #     file.mimetype
 
-    """
+    # """
 
-    if file.filename == "":
-        return "Please select a file"
+    # if file.filename == "":
+    #     return "Please select a file"
 
-    if file and allowed_file(file.filename):
-        file.filename = secure_filename(file.filename)
-        output   	  = upload_file_to_s3(file, app.config["S3_BUCKET"])
-        return str(output)
+    # if file and allowed_file(file.filename):
+    #     file.filename = secure_filename(file.filename)
+    #     output   	  = upload_file_to_s3(file, app.config["S3_BUCKET"])
+    #     return str(output)
 
-    else:
-        return "not upoladed, something is wrong!"
+    # else:
+    #     return "not upoladed, something is wrong!"
 
 
 # this only runs if `$ python src/main.py` is executed
