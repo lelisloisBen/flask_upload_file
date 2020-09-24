@@ -33,7 +33,7 @@ def upload_file():
 
     # return str(file.filename)
 	
-    if body is None:
+    if file is None:
         raise APIException("You need to specify the request body as a json object", status_code=400)
 
     if file.filename == "":
