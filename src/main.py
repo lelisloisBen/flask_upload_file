@@ -85,6 +85,7 @@ def multi_upload_files():
                         'received': 'upload failed',
                         'msg': 'not upoladed, something is wrong!'
                     })
+                    
     return jsonify({"msg": "it is not a PUT method"})
 
 # this only runs if `$ python src/main.py` is executed
