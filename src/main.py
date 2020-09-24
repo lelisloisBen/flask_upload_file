@@ -59,15 +59,15 @@ def upload_file():
 @app.route("/multi", methods=['PUT'])
 def multi_upload_files():
 
-    files = request.files['files[]']
+    files = request.files.getlist('files[]')
 
-    myList = []
+    # myList = []
 
-    for file in files:
-        myList.append(file.filename)
+    # for file in files:
+    #     myList.append(file.filename)
     
     return jsonify({
-        "seemylist": myList
+        "seemylist": files
     })
 
 
