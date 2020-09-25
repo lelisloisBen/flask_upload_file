@@ -118,7 +118,8 @@ def resize_uploaded_img():
 
     image = Image.open(file)
 
-    newImage = image.thumbnail((500, 1000))
+    image.thumbnail((500, 1000))
+    newImage = image.save(newFile)
 
     return jsonify({
         "myImageFormat": newImage.format,
