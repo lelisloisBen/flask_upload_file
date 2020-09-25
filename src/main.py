@@ -123,7 +123,7 @@ def resize_uploaded_img():
     # image.save("newFile.jpg")
     # hh
     image = Image.open(file)
-    image_io = io.BytesIO()
+    image_io = BytesIO()
     image.thumbnail((500, 1000))
     image.save(image_io, 'jpeg')
 
