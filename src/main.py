@@ -87,10 +87,10 @@ def multi_upload_files():
 
         if file and allowed_file(file.filename):
             file.filename = secure_filename(file.filename)
-            upload_file_to_s3(file, app.config["S3_BUCKET"])
-            output = str(file, app.config["S3_BUCKET"])
+            
+            output = upload_file_to_s3(file, app.config["S3_BUCKET"])
 
-            jobDone.append(output)
+            jobDone.append(str(output))
             
             # return jsonify({
             #         'received': 'uploaded successfuly',
