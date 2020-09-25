@@ -67,7 +67,6 @@ def multi_upload_files():
         myList.append(i.filename)
     
     return jsonify({
-        "seemyfiles": files,
         "seemylist": myList
     })
 
