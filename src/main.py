@@ -125,8 +125,7 @@ def resize_uploaded_img():
         "fileFormatOriginal": type(file),
         "imageFormat": type(image),
         "myImageFormat": image.format,
-        "myImageSize": image.size,
-        "myImageHtml": secure_filename(image)
+        "myImageSize": image.size
     })
 
 # this only runs if `$ python src/main.py` is executed
