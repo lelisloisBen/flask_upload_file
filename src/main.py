@@ -3,6 +3,7 @@ from flask_cors import CORS
 from utils import APIException
 from werkzeug.utils import secure_filename
 from helpers import *
+from PIL import Image
 
 app = Flask(__name__)
 app.config.from_object("config")
@@ -106,6 +107,20 @@ def multi_upload_files():
             'received': 'uploaded successfuly',
             'msg': jobDone
         })
+
+@app.route("/resize", methods=['PUT'])
+def resize_uploaded_img():
+
+    file = request.files['fileToResize']
+	
+    if file is None:
+        raise APIException("You need to specify the request body as a json object", status_code=400)
+
+    image = Image.open(file)
+
+    return jsonify({
+        "myImage": image
+    })
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':

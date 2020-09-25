@@ -16,7 +16,9 @@ def allowed_file(filename):
 def upload_file_to_s3(file, bucket_name, acl="public-read"):
 
     """
-    Docs: http://boto3.readthedocs.io/en/latest/guide/s3.html
+    Docs = http://boto3.readthedocs.io/en/latest/guide/s3.html
+    Docs S3 = https://stackabuse.com/file-management-with-aws-s3-python-and-flask/
+    Docs resize img = https://auth0.com/blog/image-processing-in-python-with-pillow/#:~:text=To%20resize%20an%20image%2C%20you,Image%20with%20the%20new%20dimensions.
     """
 
     try:
