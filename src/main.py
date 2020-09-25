@@ -128,7 +128,6 @@ def resize_uploaded_img():
     image.save(image_io, 'jpeg')
 
     return jsonify({
-        "imageFormat": type(image),
         "myImageFormat": image.format,
         "myImageSize": image.size,
         "name": image.filename
