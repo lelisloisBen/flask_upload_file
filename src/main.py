@@ -75,6 +75,8 @@ def multi_upload_files():
     if files is None:
         raise APIException("You need to specify the request body as a json object", status_code=400)
 
+    jobDone = []
+
     for file in files:
 
         if file.filename == "":
@@ -87,17 +89,23 @@ def multi_upload_files():
             file.filename = secure_filename(file.filename)
             upload_file_to_s3(file, app.config["S3_BUCKET"])
             output = str(file, app.config["S3_BUCKET"])
+
+            jobDone.append(output)
             
-            return jsonify({
-                    'received': 'uploaded successfuly',
-                    'msg': output
-                })
+            # return jsonify({
+            #         'received': 'uploaded successfuly',
+            #         'msg': output
+            #     })
         else:
             return jsonify({
                     'received': 'upload failed',
                     'msg': 'not upoladed, something is wrong!'
                 })
 
+    return jsonify({
+            'received': 'uploaded successfuly',
+            'msg': jobDone
+        })
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
