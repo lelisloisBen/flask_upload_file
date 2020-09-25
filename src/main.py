@@ -61,40 +61,40 @@ def multi_upload_files():
 
     files = request.files.getlist('files[]')
 
-    myList = []
+    # myList = []
 
-    for i in files:
-        myList.append(i.filename)
+    # for i in files:
+    #     myList.append(i.filename)
     
-    return jsonify({
-        "seemylist": myList
-    })
+    # return jsonify({
+    #     "seemylist": myList
+    # })
 
 
 
-    # if files is None:
-    #     raise APIException("You need to specify the request body as a json object", status_code=400)
+    if files is None:
+        raise APIException("You need to specify the request body as a json object", status_code=400)
 
-    # for file in files:
+    for file in files:
 
-    #     if file.filename == "":
-    #         return jsonify({
-    #                 'received': 'nope its empty',
-    #                 'msg': 'Please select a file'
-    #             })
+        if file.filename == "":
+            return jsonify({
+                    'received': 'nope its empty',
+                    'msg': 'Please select a file'
+                })
 
-    #     if file and allowed_file(file.filename):
-    #         file.filename = secure_filename(file.filename)
-    #         output   	  = upload_file_to_s3(file, app.config["S3_BUCKET"])
-    #         return jsonify({
-    #                 'received': 'uploaded successfuly',
-    #                 'msg': str(output)
-    #             })
-    #     else:
-    #         return jsonify({
-    #                 'received': 'upload failed',
-    #                 'msg': 'not upoladed, something is wrong!'
-    #             })
+        if file and allowed_file(file.filename):
+            file.filename = secure_filename(file.filename)
+            output   	  = upload_file_to_s3(file, app.config["S3_BUCKET"])
+            return jsonify({
+                    'received': 'uploaded successfuly',
+                    'msg': str(output)
+                })
+        else:
+            return jsonify({
+                    'received': 'upload failed',
+                    'msg': 'not upoladed, something is wrong!'
+                })
 
 
 # this only runs if `$ python src/main.py` is executed
