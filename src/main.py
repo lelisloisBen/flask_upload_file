@@ -116,7 +116,7 @@ def resize_uploaded_img():
     if file is None:
         raise APIException("You need to specify the request body as a json object", status_code=400)
 
-    image = Image.open(file)
+    image = Image.open(file.filename)
 
     image.thumbnail((500, 1000))
     image.save("newFile.jpg")
