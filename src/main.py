@@ -118,9 +118,12 @@ def resize_uploaded_img():
 
     image = Image.open(file)
 
+    newImage = image.thumbnail((500, 1000))
+
     return jsonify({
-        "myImage": image.filename,
-        "myImageSize": image.size
+        "myImageFormat": newImage.format,
+        "myImageSize": newImage.size,
+        "myImageHtml": "<img src=' " + newImage + " ' alt='new' >"
     })
 
 # this only runs if `$ python src/main.py` is executed
