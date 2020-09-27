@@ -163,17 +163,18 @@ def resize_uploaded_img():
     print("file", file)
     print("format",image.format)
     print("in_mem_file",in_mem_file)
+    print("infos", image.info)
 
     # return jsonify({
     #         'received': 'utest',
     #         'msg': file.filename
     #     })
 
-    output = upload_file_to_s3(file, app.config["S3_BUCKET"])
-    return jsonify({
-            'received': 'uploaded successfuly',
-            'msg': str(output)
-        })
+    # output = upload_file_to_s3(file, app.config["S3_BUCKET"])
+    # return jsonify({
+    #         'received': 'uploaded successfuly',
+    #         'msg': str(output)
+    #     })
 
     # return jsonify({
     #     "myImageFormat": image.format,
