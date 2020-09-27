@@ -122,19 +122,25 @@ def resize_uploaded_img():
     # image.thumbnail((500, 1000))
     # image.save("newFile.jpg")
     # ///
-    image = Image.open(file.filename)
-    image_io = BytesIO()
-    image.thumbnail((500, 1000))
-    image.save(image_io, 'jpeg')
+    # image = Image.open(file.filename)
+    # image_io = BytesIO()
+    # image.thumbnail((500, 1000))
+    # image.save(image_io, 'jpeg')
     # ////
     # image = Image.fromarray(file, mode=None)
     # image.thumbnail((500, 1000))
+    # ///
+    image = Image.open(file)
+    img_io = BytesIO()
+    image.save(img_io, 'JPEG', quality=70)
+    img_io.seek(0)
+    return send_file(img_io, mimetype='image/jpeg')
 
-    return jsonify({
-        "myImageFormat": image.format,
-        "myImageSize": image.size,
-        "myImage": image
-    })
+    # return jsonify({
+    #     "myImageFormat": image.format,
+    #     "myImageSize": image.size,
+    #     "myImage": image
+    # })
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
