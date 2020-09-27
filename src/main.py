@@ -141,7 +141,7 @@ def resize_uploaded_img():
     return jsonify({
         "myImageFormat": image.format,
         "myImageSize": image.size,
-        "myImage": image
+        "myImage": image.filename
     })
 
 # this only runs if `$ python src/main.py` is executed
