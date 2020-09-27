@@ -114,6 +114,10 @@ def resize_uploaded_img():
 
     files = request.files.getlist('files[]')
 
+    if files is None:
+        raise APIException("You need to specify the request body as a json object", status_code=400)
+
+
     jobDone = []
 
     for file in files:
