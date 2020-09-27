@@ -113,6 +113,8 @@ def multi_upload_files():
 def resize_uploaded_img():
 
     file = request.files['fileToResize']
+    myFileName = file.filename
+    myType = file.content_type
 	
     if file is None:
         raise APIException("You need to specify the request body as a json object", status_code=400)
@@ -169,7 +171,7 @@ def resize_uploaded_img():
     image = Image.open(in_mem_file)
     image.thumbnail((500, 1000))
     in_mem_file = BytesIO()
-    image.save(in_mem_file, format=image.format, filename=file.filename)
+    image.save(in_mem_file, content_type=myType, filename=myFileName)
     # file = in_mem_file
     in_mem_file.seek(0)
 
