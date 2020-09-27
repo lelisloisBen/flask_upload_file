@@ -157,11 +157,11 @@ def resize_uploaded_img():
     image = Image.open(in_mem_file)
     image.thumbnail((500, 1000))
     in_mem_file = BytesIO()
-    image.save(in_mem_file, content_type=pil_image.format, filename=file.filename)
+    image.save(in_mem_file, content_type=in_mem_file.format, filename=file.filename)
     file = in_mem_file
 
     print("file", file)
-    print("pil_image",pil_image)
+    print("format",in_mem_file.format)
     print("in_mem_file",in_mem_file)
 
     # return jsonify({
