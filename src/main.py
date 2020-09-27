@@ -138,15 +138,21 @@ def resize_uploaded_img():
     # image = Image.open(file.stream.read())
     # image_bytes = BytesIO(file.stream.read())
     myImage = file.stream.read()
+    print("from the stream: ",myImage)
     img = Image.open(BytesIO(myImage))
+    print("the byte: ",img)
     img.thumbnail((500, 1000))
+    print("after resizing: ", img)
     img.seek(0)
+    print("after seek: ", img)
 
-    output = upload_file_to_s3(img, app.config["S3_BUCKET"])
-    return jsonify({
-            'received': 'uploaded successfuly',
-            'msg': str(output)
-        })
+    return str(img)
+
+    # output = upload_file_to_s3(img, app.config["S3_BUCKET"])
+    # return jsonify({
+    #         'received': 'uploaded successfuly',
+    #         'msg': str(output)
+    #     })
 
     # return jsonify({
     #     "myImageFormat": image.format,
