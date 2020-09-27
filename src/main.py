@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file, models
+from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 from utils import APIException
 from werkzeug.utils import secure_filename
@@ -135,45 +135,23 @@ def resize_uploaded_img():
     # image.save(img_io, 'JPEG', quality=70)
     # img_io.seek(0)
     # return send_file(img_io, mimetype='image/jpeg')
-    # image = Image.open(file.stream)
-    # image.thumbnail((500, 1000))
+    # image = Image.open(file.stream.read())
+    image_bytes = BytesIO(file.stream.read())
+    img = Image.open(image_bytes)
+    img.thumbnail((500, 1000))
 
-    # output = upload_file_to_s3(image, app.config["S3_BUCKET"])
-    # return jsonify({
-    #         'received': 'uploaded successfuly',
-    #         'msg': str(output)
-    #     })
+    output = upload_file_to_s3(img, app.config["S3_BUCKET"])
+    return jsonify({
+            'received': 'uploaded successfuly',
+            'msg': str(output)
+        })
 
     # return jsonify({
     #     "myImageFormat": image.format,
     #     "myImageSize": image.size,
     #     "myImage": image.filename
     # })
-    # file = request.files['file'] 
-    # produces an instance of FileStorage
-
-    asset = models.Asset(file, AssetType.profile_img, donor.id) 
-    # a model managed by the ORM
-
-    image_bytes = BytesIO(file.stream.read())
-    # save bytes in a buffer
-
-    img = Image.open(image_bytes)
-    # produces a PIL Image object
-
-    size = img.size
-    # read the size of the Image object
-
-    asset.width = size[0]
-    asset.height = size[1]
-    # set the size to the ORM
-
-    image_bytes.seek(0)
-    output = upload_file_to_s3(image_bytes, app.config["S3_BUCKET"])
-    return jsonify({
-            'received': 'uploaded successfuly',
-            'msg': str(output)
-        })
+    
     # response = s3.Object('my-bucket', asset.s3_key()).put(Body=image_bytes)
     # upload to S3
 
