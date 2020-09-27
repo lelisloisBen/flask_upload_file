@@ -138,11 +138,17 @@ def resize_uploaded_img():
     image = Image.open(file.stream)
     image.thumbnail((500, 1000))
 
+    output = upload_file_to_s3(image, app.config["S3_BUCKET"])
     return jsonify({
-        "myImageFormat": image.format,
-        "myImageSize": image.size,
-        "myImage": image.filename
-    })
+            'received': 'uploaded successfuly',
+            'msg': str(output)
+        })
+
+    # return jsonify({
+    #     "myImageFormat": image.format,
+    #     "myImageSize": image.size,
+    #     "myImage": image.filename
+    # })
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
