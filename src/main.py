@@ -160,6 +160,7 @@ def resize_uploaded_img():
     in_mem_file.seek(0)
 
     print("file", file)
+    print("pil_image",pil_image)
     print("in_mem_file",in_mem_file)
 
     return jsonify({
