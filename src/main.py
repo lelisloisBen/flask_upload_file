@@ -161,7 +161,7 @@ def resize_uploaded_img():
     file = in_mem_file
 
     print("file", file)
-    print("format",file.content_type)
+    print("format",image.format)
     print("in_mem_file",in_mem_file)
 
     # return jsonify({
