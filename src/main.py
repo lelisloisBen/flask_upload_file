@@ -156,7 +156,7 @@ def resize_uploaded_img():
     # Save the image to an in-memory file
     in_mem_file = BytesIO()
     in_mem_file.thumbnail((500, 1000))
-    pil_image.save(in_mem_file, format=pil_image.format)
+    pil_image.save(in_mem_file, format=pil_image.format, filename=file.filename)
     in_mem_file.seek(0)
 
     print("file", file)
