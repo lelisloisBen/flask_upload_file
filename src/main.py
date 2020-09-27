@@ -125,10 +125,9 @@ def resize_uploaded_img():
                 })
 
         if file and allowed_file(file.filename):
-            file.filename = secure_filename(file.filename)
+            myFileName = secure_filename(file.filename)
 
-            myFileName = file.filename
-            myType = file.content_type
+            myType = myFileName.content_type
 
             in_mem_file = BytesIO(file.read())
             image = Image.open(in_mem_file)
