@@ -138,7 +138,7 @@ def resize_uploaded_img():
     # image = Image.open(file.stream.read())
     # image_bytes = BytesIO(file.stream.read())
     myImage = file.stream.read()
-    img = Image.open(myImage)
+    img = Image.open(BytesIO(myImage))
     img.thumbnail((500, 1000))
     img.seek(0)
 
