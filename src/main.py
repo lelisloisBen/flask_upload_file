@@ -137,7 +137,7 @@ def resize_uploaded_img():
     # return send_file(img_io, mimetype='image/jpeg')
     # image = Image.open(file.stream.read())
     # image_bytes = BytesIO(file.stream.read())
-    myImage = file.stream.read()
+    myImage = file.read()
     print("from the stream: ",myImage)
     img = Image.open(BytesIO(myImage))
     print("the byte: ",img)
