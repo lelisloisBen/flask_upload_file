@@ -153,21 +153,23 @@ def resize_uploaded_img():
   
 
     # Save the image to an in-memory file
-    in_mem_file = BytesIO(file.read())
-    image = Image.open(in_mem_file)
-    image.thumbnail((500, 1000))
-    in_mem_file = BytesIO()
-    image.save(in_mem_file, format=image.format, filename=file.filename)
-    file = in_mem_file
+    # in_mem_file = BytesIO(file.read())
+    # image = Image.open(in_mem_file)
+    # image.thumbnail((500, 1000))
+    # in_mem_file = BytesIO()
+    # image.save(in_mem_file, format=image.format, filename=file.filename)
+    # file = in_mem_file
 
-    print("file", file)
-    print("format",image.format)
-    print("in_mem_file",in_mem_file)
-    print("infos", image.info)
+    # print("file", file)
+    # print("format",image.format)
+    # print("in_mem_file",in_mem_file)
+    # print("infos", image.info)
+
+    print(file)
 
     return jsonify({
             'received': 'utest',
-            'msg': image.info
+            'msg': file.filename
         })
 
     # output = upload_file_to_s3(file, app.config["S3_BUCKET"])
