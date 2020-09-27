@@ -151,7 +151,7 @@ def resize_uploaded_img():
     # print("file.filename",file.filename)
 
     # Open image
-    pil_image = Image.open(file.raw)
+    pil_image = Image.open(file)
 
     # Save the image to an in-memory file
     in_mem_file = BytesIO()
@@ -159,6 +159,7 @@ def resize_uploaded_img():
     pil_image.save(in_mem_file, format=pil_image.format)
     in_mem_file.seek(0)
 
+    print("file", file)
     print("in_mem_file",in_mem_file)
 
     return jsonify({
