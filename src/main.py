@@ -171,11 +171,11 @@ def resize_uploaded_img():
     image = Image.open(in_mem_file)
     image.thumbnail((500, 1000))
     in_mem_file = BytesIO()
-    image.save(in_mem_file, format="PNG", filename=myFileName)
+    image.save(in_mem_file, format="PNG")
     # file = in_mem_file
     in_mem_file.seek(0)
 
-    output = upload_file_to_s3(in_mem_file, app.config["S3_BUCKET"])
+    output = upload_file_to_s3(in_mem_file, app.config["S3_BUCKET"], myFileName)
     return jsonify({
             'received': 'uploaded successfuly',
             'msg': str(output)

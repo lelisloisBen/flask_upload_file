@@ -13,7 +13,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def upload_file_to_s3(file, bucket_name, acl="public-read"):
+def upload_file_to_s3(file, bucket_name, file_name, acl="public-read"):
 
     """
     Docs = http://boto3.readthedocs.io/en/latest/guide/s3.html
@@ -26,7 +26,7 @@ def upload_file_to_s3(file, bucket_name, acl="public-read"):
         s3.upload_fileobj(
             file,
             bucket_name,
-            file.filename,
+            file_name,
             ExtraArgs={
                 "ACL": acl,
                 "ContentType": file.format
