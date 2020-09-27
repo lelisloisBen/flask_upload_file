@@ -150,14 +150,15 @@ def resize_uploaded_img():
     # print("file",file)
     # print("file.filename",file.filename)
 
-    # Open image
-    pil_image = Image.open(file)
+  
 
     # Save the image to an in-memory file
+    in_mem_file = BytesIO(file.read())
+    image = Image.open(in_mem_file)
+    image.thumbnail((500, 1000))
     in_mem_file = BytesIO()
-    in_mem_file.thumbnail((500, 1000))
-    pil_image.save(in_mem_file, format=pil_image.format, filename=file.filename)
-    in_mem_file.seek(0)
+    image.save(in_mem_file, content_type=pil_image.format, filename=file.filename)
+    file = in_mem_file
 
     print("file", file)
     print("pil_image",pil_image)
@@ -168,7 +169,7 @@ def resize_uploaded_img():
     #         'msg': file.filename
     #     })
 
-    output = upload_file_to_s3(in_mem_file, app.config["S3_BUCKET"])
+    output = upload_file_to_s3(file, app.config["S3_BUCKET"])
     return jsonify({
             'received': 'uploaded successfuly',
             'msg': str(output)
