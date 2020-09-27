@@ -137,18 +137,28 @@ def resize_uploaded_img():
     # return send_file(img_io, mimetype='image/jpeg')
     # image = Image.open(file.stream.read())
     # image_bytes = BytesIO(file.stream.read())
-    myImage = file.read()
+    # myImage = file.read()
     # print("from the stream: ",myImage)
-    img = Image.open(BytesIO(myImage))
+    # img = Image.open(BytesIO(myImage))
     # print("the byte: ",img)
-    img.thumbnail((500, 1000))
-    print("after resizing: ", img)
-    img.seek(0)
-    print("after seek: ", img)
-    img.save(file.filename)
-    print("img",img)
-    print("file",file)
-    print("file.filename",file.filename)
+    # img.thumbnail((500, 1000))
+    # print("after resizing: ", img)
+    # img.seek(0)
+    # print("after seek: ", img)
+    # img.save(file.filename)
+    # print("img",img)
+    # print("file",file)
+    # print("file.filename",file.filename)
+
+    # Open image
+    pil_image = Image.open(file.raw)
+
+    # Save the image to an in-memory file
+    in_mem_file = BytesIO()
+    pil_image.save(in_mem_file, format=pil_image.format)
+    in_mem_file.seek(0)
+
+    print("in_mem_file",in_mem_file)
 
     return jsonify({
             'received': 'utest',
