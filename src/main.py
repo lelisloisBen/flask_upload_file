@@ -136,8 +136,9 @@ def resize_uploaded_img():
     # img_io.seek(0)
     # return send_file(img_io, mimetype='image/jpeg')
     # image = Image.open(file.stream.read())
-    image_bytes = BytesIO(file.stream.read())
-    img = Image.open(image_bytes)
+    # image_bytes = BytesIO(file.stream.read())
+    myImage = file.read()
+    img = Image.open(myImage)
     img.thumbnail((500, 1000))
 
     output = upload_file_to_s3(img, app.config["S3_BUCKET"])
