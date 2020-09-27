@@ -112,24 +112,44 @@ def multi_upload_files():
 @app.route("/resize", methods=['PUT'])
 def resize_uploaded_img():
 
-    file = request.files['fileToResize']
-    myFileName = file.filename
-    myType = file.content_type
-	
-    if file is None:
-        raise APIException("You need to specify the request body as a json object", status_code=400)
+    files = request.files.getlist('files[]')
 
-    in_mem_file = BytesIO(file.read())
-    image = Image.open(in_mem_file)
-    image.thumbnail((500, 1000))
-    in_mem_file = BytesIO()
-    image.save(in_mem_file, format="PNG")
-    in_mem_file.seek(0)
+    jobDone = []
 
-    output = upload_file_to_s3(in_mem_file, app.config["S3_BUCKET"], myFileName, myType)
+    for file in files:
+
+        if file.filename == "":
+            return jsonify({
+                    'received': 'nope its empty',
+                    'msg': 'Please select a file'
+                })
+
+        if file and allowed_file(file.filename):
+            file.filename = secure_filename(file.filename)
+
+            myFileName = file.filename
+            myType = file.content_type
+
+            in_mem_file = BytesIO(file.read())
+            image = Image.open(in_mem_file)
+            image.thumbnail((500, 1000))
+            in_mem_file = BytesIO()
+            image.save(in_mem_file, format="PNG")
+            in_mem_file.seek(0)
+
+            output = upload_file_to_s3(in_mem_file, app.config["S3_BUCKET"], myFileName, myType)
+
+            jobDone.append(str(output))
+            
+        else:
+            return jsonify({
+                    'received': 'upload failed',
+                    'msg': 'not upoladed, something is wrong!'
+                })
+
     return jsonify({
             'received': 'uploaded successfuly',
-            'msg': str(output)
+            'msg': jobDone
         })
 
 
