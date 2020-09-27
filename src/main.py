@@ -119,60 +119,11 @@ def resize_uploaded_img():
     if file is None:
         raise APIException("You need to specify the request body as a json object", status_code=400)
 
-    # image = Image.open(file)
-
-    # image.thumbnail((500, 1000))
-    # image.save("newFile.jpg")
-    # ///
-    # image = Image.open(file.filename)
-    # image_io = BytesIO()
-    # image.thumbnail((500, 1000))
-    # image.save(image_io, 'jpeg')
-    # ////
-    # image = Image.fromarray(file, mode=None)
-    # image.thumbnail((500, 1000))
-    # ///
-    # image = Image.open(file)
-    # img_io = BytesIO()
-    # image.save(img_io, 'JPEG', quality=70)
-    # img_io.seek(0)
-    # return send_file(img_io, mimetype='image/jpeg')
-    # image = Image.open(file.stream.read())
-    # image_bytes = BytesIO(file.stream.read())
-    # myImage = file.read()
-    # print("from the stream: ",myImage)
-    # img = Image.open(BytesIO(myImage))
-    # print("the byte: ",img)
-    # img.thumbnail((500, 1000))
-    # print("after resizing: ", img)
-    # img.seek(0)
-    # print("after seek: ", img)
-    # img.save(file.filename)
-    # print("img",img)
-    # print("file",file)
-    # print("file.filename",file.filename)
-
-  
-
-    # Save the image to an in-memory file
-    # in_mem_file = BytesIO(file.read())
-    # image = Image.open(in_mem_file)
-    # image.thumbnail((500, 1000))
-    # in_mem_file = BytesIO()
-    # image.save(in_mem_file, format=image.format, filename=file.filename)
-    # file = in_mem_file
-
-    # print("file", file)
-    # print("format",image.format)
-    # print("in_mem_file",in_mem_file)
-    # print("infos", image.info)
-
     in_mem_file = BytesIO(file.read())
     image = Image.open(in_mem_file)
     image.thumbnail((500, 1000))
     in_mem_file = BytesIO()
     image.save(in_mem_file, format="PNG")
-    # file = in_mem_file
     in_mem_file.seek(0)
 
     output = upload_file_to_s3(in_mem_file, app.config["S3_BUCKET"], myFileName, myType)
@@ -181,27 +132,6 @@ def resize_uploaded_img():
             'msg': str(output)
         })
 
-    # print(file)
-
-    # return jsonify({
-    #         'received': 'utest',
-    #         'msg': file.filename
-    #     })
-
-    # output = upload_file_to_s3(file, app.config["S3_BUCKET"])
-    # return jsonify({
-    #         'received': 'uploaded successfuly',
-    #         'msg': str(output)
-    #     })
-
-    # return jsonify({
-    #     "myImageFormat": image.format,
-    #     "myImageSize": image.size,
-    #     "myImage": image.filename
-    # })
-    
-    # response = s3.Object('my-bucket', asset.s3_key()).put(Body=image_bytes)
-    # upload to S3
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
