@@ -116,44 +116,45 @@ def resize_uploaded_img():
 
     if files is None:
         raise APIException("You need to specify the request body as a json object", status_code=400)
+    
+    else:
 
+        jobDone = []
 
-    jobDone = []
+        for file in files:
 
-    for file in files:
+            if file.filename == "":
+                return jsonify({
+                        'received': 'nope its empty',
+                        'msg': 'Please select a file'
+                    })
 
-        if file.filename == "":
-            return jsonify({
-                    'received': 'nope its empty',
-                    'msg': 'Please select a file'
-                })
+            if file and allowed_file(file.filename):
+                myFileName = secure_filename(file.filename)
 
-        if file and allowed_file(file.filename):
-            myFileName = secure_filename(file.filename)
+                myType = file.content_type
 
-            myType = file.content_type
+                in_mem_file = BytesIO(file.read())
+                image = Image.open(in_mem_file)
+                image.thumbnail((500, 1000))
+                in_mem_file = BytesIO()
+                image.save(in_mem_file, format="PNG")
+                in_mem_file.seek(0)
 
-            in_mem_file = BytesIO(file.read())
-            image = Image.open(in_mem_file)
-            image.thumbnail((500, 1000))
-            in_mem_file = BytesIO()
-            image.save(in_mem_file, format="PNG")
-            in_mem_file.seek(0)
+                output = upload_file_to_s3(in_mem_file, app.config["S3_BUCKET"], myFileName, myType)
 
-            output = upload_file_to_s3(in_mem_file, app.config["S3_BUCKET"], myFileName, myType)
+                jobDone.append(str(output))
+                
+            else:
+                return jsonify({
+                        'received': 'upload failed',
+                        'msg': 'not upoladed, something is wrong!'
+                    })
 
-            jobDone.append(str(output))
-            
-        else:
-            return jsonify({
-                    'received': 'upload failed',
-                    'msg': 'not upoladed, something is wrong!'
-                })
-
-    return jsonify({
-            'received': 'uploaded successfuly',
-            'msg': jobDone
-        })
+        return jsonify({
+                'received': 'uploaded successfuly',
+                'msg': jobDone
+            })
 
 
 # this only runs if `$ python src/main.py` is executed
