@@ -8,18 +8,18 @@ from PIL import Image
 from io import BytesIO  
 from flask_mysqldb import MySQL
 
+app = Flask(__name__)
+app.config.from_object("config")
+
+CORS(app)
+
 
 app.config['MYSQL_HOST'] = os.environ.get("HOST_MYSQL")
 app.config['MYSQL_USER'] = os.environ.get("USER_MYSQL")
 app.config['MYSQL_PASSWORD'] = os.environ.get("PASS_MYSQL")
 app.config['MYSQL_DB'] = os.environ.get("DATABASE_MYSQL")
-
 mysql = MySQL(app)
 
-app = Flask(__name__)
-app.config.from_object("config")
-
-CORS(app)
 
 # app.config.from_object("flask_s3_upload.config")
 
