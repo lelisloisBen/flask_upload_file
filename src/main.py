@@ -47,7 +47,10 @@ def mysql_queries():
 
         query = "INSERT INTO activity_images(user_id, img_name, img_path, img_type) VALUES (userID, imageName, imagePath, imageType)"
 
-        cur = mysql.connection.cursor()
+        cur = mysql.get_db().cursor()
+        cur.execute("USE myflaskapp")
+
+        # cur = mysql.connection.cursor()
         cur.execute(query)
         mysql.connection.commit()
         cur.close()
