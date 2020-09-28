@@ -6,3 +6,4 @@ botocore
 werkzeug
 Pillow
 flask-io
+Flask-MySQLdb

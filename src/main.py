@@ -5,6 +5,14 @@ from werkzeug.utils import secure_filename
 from helpers import *
 from PIL import Image
 from io import BytesIO  
+from flask_mysqldb import MySQL
+
+app.config['MYSQL_HOST'] = MYSQL_HOSTNAME
+app.config['MYSQL_USER'] = MYSQL_USERNAME
+app.config['MYSQL_PASSWORD'] = MYSQL_PASS
+app.config['MYSQL_DB'] = MYSQL_DATABASE
+
+mysql = MySQL(app)
 
 app = Flask(__name__)
 app.config.from_object("config")
@@ -23,6 +31,30 @@ def handle_invalid_usage(error):
 def hello_world():
     return "<div style='text-align: center; background-color: orange'><h1>Backend running...</h1><br/><h3>Welcome back samir</h3><img src='https://media.gettyimages.com/photos/woman-sitting-by-washing-machine-picture-id117852649?s=2048x2048' width='80%' /></div>"
 
+@app.route('/sql', methods=['POST'])
+def mysql_queries():
+    if request.method == 'POST':
+        
+        userID = request.form['user_id']
+        imageName = request.form['image_name']
+        imagePath = request.form['image_path']
+        imageType = request.form['image_type']
+
+        query = "INSERT INTO \
+            activity_images(user_id, img_name, img_path, img_type) \
+            VALUES (userID, imageName, imagePath, imageType) "
+
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        mysql.connection.commit()
+        cur.close()
+
+        return 'success'
+        
+    return jsonify({
+        'connect': 'success',
+        'msg': 'done'
+    })
 @app.route('/see_type', methods=['POST','PUT'])
 def see_type_file():
 
