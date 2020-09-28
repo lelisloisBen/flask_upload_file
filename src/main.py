@@ -32,10 +32,10 @@ def mysql_queries():
     if request.method == 'POST':
         
         # userID = int(request.form['user_id'])
-        userID = request.form.get('user_id', type=int)
-        imageName = request.form['image_name']
-        imagePath = request.form['image_path']
-        imageType = request.form['image_type']
+        userID = request.args.get('user_id', type=int)
+        imageName = request.args['image_name']
+        imagePath = request.args['image_path']
+        imageType = request.args['image_type']
 
         
         # cur = mysql.connection.cursor()
