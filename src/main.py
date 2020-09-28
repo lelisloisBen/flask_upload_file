@@ -23,7 +23,15 @@ def handle_invalid_usage(error):
 def hello_world():
     return "<div style='text-align: center; background-color: orange'><h1>Backend running...</h1><br/><h3>Welcome back samir</h3><img src='https://media.gettyimages.com/photos/woman-sitting-by-washing-machine-picture-id117852649?s=2048x2048' width='80%' /></div>"
 
+@app.route('/see_type', methods=['POST','PUT'])
+def see_type_file():
 
+    file = request.files['the_file']
+    mimetype = file.content_type
+
+    return jsonify({
+        "the type": mimetype
+    })
 
 @app.route("/upload", methods=['POST','PUT'])
 def upload_file():
