@@ -121,8 +121,8 @@ def multi_upload_files():
 def resize_uploaded_img():
 
     files = request.files.getlist('files[]')
-    firstname = request.files['userName']
-    lastname = request.files['userLast']
+    firstname = request.form['userName']
+    lastname = request.form['userLast']
 
     if not files:
         raise APIException("You need to specify the request body as a json object", status_code=400)
