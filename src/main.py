@@ -11,14 +11,6 @@ from flask_mysqldb import MySQL
 app = Flask(__name__)
 app.config.from_object("config")
 
-
-
-
-app.config['MYSQL_URL'] = os.environ.get("HOST_MYSQL")
-app.config['MYSQL_USER'] = os.environ.get("USER_MYSQL")
-app.config['MYSQL_PASSWORD'] = os.environ.get("PASS_MYSQL")
-app.config['MYSQL_DB'] = os.environ.get("DATABASE_MYSQL")
-
 CORS(app)
 mysql = MySQL(app)
 
