@@ -7,10 +7,11 @@ from PIL import Image
 from io import BytesIO  
 from flask_mysqldb import MySQL
 
-app.config['MYSQL_HOST'] = MYSQL_HOSTNAME
-app.config['MYSQL_USER'] = MYSQL_USERNAME
-app.config['MYSQL_PASSWORD'] = MYSQL_PASS
-app.config['MYSQL_DB'] = MYSQL_DATABASE
+
+app.config['MYSQL_HOST'] = os.environ.get("HOST_MYSQL")
+app.config['MYSQL_USER'] = os.environ.get("USER_MYSQL")
+app.config['MYSQL_PASSWORD'] = os.environ.get("PASS_MYSQL")
+app.config['MYSQL_DB'] = os.environ.get("DATABASE_MYSQL")
 
 mysql = MySQL(app)
 
@@ -50,7 +51,7 @@ def mysql_queries():
         cur.close()
 
         return 'success'
-        
+
     return jsonify({
         'connect': 'success',
         'msg': 'done'
