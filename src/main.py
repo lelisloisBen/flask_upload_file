@@ -38,7 +38,7 @@ def mysql_queries():
 
         
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO activity_images(user_id, img_name, img_path, img_type) VALUES (%s, %s, %s, %s)", (userID, imageName, imagePath, imageType))
+        cur.execute("INSERT INTO activity_images(user_id, img_name, img_path, img_type) VALUES (%d, %s, %s, %s)", (userID, imageName, imagePath, imageType))
         mysql.connection.commit()
         cur.close()
 
