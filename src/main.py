@@ -13,15 +13,14 @@ app.config.from_object("config")
 
 
 
+
 app.config['MYSQL_URL'] = os.environ.get("HOST_MYSQL")
 app.config['MYSQL_USER'] = os.environ.get("USER_MYSQL")
 app.config['MYSQL_PASSWORD'] = os.environ.get("PASS_MYSQL")
 app.config['MYSQL_DB'] = os.environ.get("DATABASE_MYSQL")
 
-mysql = MySQL()
-mysql.init_app(app)
-
 CORS(app)
+mysql = MySQL(app)
 
 
 # app.config.from_object("flask_s3_upload.config")
@@ -47,10 +46,7 @@ def mysql_queries():
 
         query = "INSERT INTO activity_images(user_id, img_name, img_path, img_type) VALUES (userID, imageName, imagePath, imageType)"
 
-        cur = mysql.get_db().cursor()
-        cur.execute("USE myflaskapp")
-
-        # cur = mysql.connection.cursor()
+        cur = mysql.connection.cursor()
         cur.execute(query)
         mysql.connection.commit()
         cur.close()
