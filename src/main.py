@@ -38,17 +38,20 @@ def mysql_queries():
         imageType = request.form['image_type']
 
         
-        cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO activity_images(user_id, img_name, img_path, img_type) VALUES (%s, %s, %s, %s)", (userID, imageName, imagePath, imageType))
-        mysql.connection.commit()
-        cur.close()
+        # cur = mysql.connection.cursor()
+        # cur.execute("INSERT INTO activity_images(user_id, img_name, img_path, img_type) VALUES (%s, %s, %s, %s)", (userID, imageName, imagePath, imageType))
+        # mysql.connection.commit()
+        # cur.close()
 
-        return 'success'
+        # return 'success'
 
-    return jsonify({
-        'connect': 'success',
-        'msg': 'done'
-    })
+        return jsonify({
+            'connect': 'success',
+            'id': userID,
+            'name': imageName,
+            'path': imagePath,
+            'type': imageType
+        })
 @app.route('/see_type', methods=['POST','PUT'])
 def see_type_file():
 
