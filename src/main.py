@@ -142,6 +142,8 @@ def resize_uploaded_img():
 
                 myType = file.content_type
 
+                myClientFolder = "clientFolder"
+
                 in_mem_file = BytesIO(file.read())
                 image = Image.open(in_mem_file)
                 image.thumbnail((500, 1000))
@@ -149,7 +151,7 @@ def resize_uploaded_img():
                 image.save(in_mem_file, format="PNG")
                 in_mem_file.seek(0)
 
-                output = upload_file_to_s3(in_mem_file, app.config["S3_BUCKET"], myFileName, myType)
+                output = upload_file_to_s3(in_mem_file, app.config["S3_BUCKET"], myClientFolder, myFileName, myType)
 
                 jobDone.append(str(output))
                 
