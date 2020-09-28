@@ -14,10 +14,10 @@ app.config.from_object("config")
 CORS(app)
 
 
-app.config['MYSQL_HOST'] = os.environ.get("HOST_MYSQL")
-app.config['MYSQL_USER'] = os.environ.get("USER_MYSQL")
-app.config['MYSQL_PASSWORD'] = os.environ.get("PASS_MYSQL")
-app.config['MYSQL_DB'] = os.environ.get("DATABASE_MYSQL")
+app.config['MYSQL_URL'] = os.environ.get("CLEARDB_DATABASE_URL")
+# app.config['MYSQL_USER'] = os.environ.get("USER_MYSQL")
+# app.config['MYSQL_PASSWORD'] = os.environ.get("PASS_MYSQL")
+# app.config['MYSQL_DB'] = os.environ.get("DATABASE_MYSQL")
 mysql = MySQL(app)
 
 
