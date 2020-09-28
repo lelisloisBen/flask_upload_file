@@ -20,7 +20,6 @@ def upload_file_to_s3(file, bucket_name, folder_name, file_name, myType, acl="pu
     Docs S3 = https://stackabuse.com/file-management-with-aws-s3-python-and-flask/
     Docs resize img = https://auth0.com/blog/image-processing-in-python-with-pillow/#:~:text=To%20resize%20an%20image%2C%20you,Image%20with%20the%20new%20dimensions.
     Go to ressources and add ClearDB free mysql database
-    URL = mysql://b00ad00d2d8879:c6ce3d0a@us-cdbr-east-02.cleardb.com/heroku_0f90179e60a0a02?reconnect=true
     """
     # directory_name = folder_name
     # s3.put_object(Bucket=bucket_name, Key=(directory_name+'/'))
