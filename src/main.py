@@ -31,7 +31,7 @@ def hello_world():
 def mysql_queries():
     if request.method == 'POST':
         
-        userID = request.form['user_id']
+        userID = int(request.form['user_id'])
         imageName = request.form['image_name']
         imagePath = request.form['image_path']
         imageType = request.form['image_type']
