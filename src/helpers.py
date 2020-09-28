@@ -22,7 +22,6 @@ def upload_file_to_s3(file, bucket_name, folder_name, file_name, myType, acl="pu
     """
     directory_name = folder_name
     s3.put_object(Bucket=bucket_name, Key=(directory_name+'/'))
-
     file_path = directory_name+"/"+file_name
 
     try:
