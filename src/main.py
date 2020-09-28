@@ -37,6 +37,11 @@ def mysql_queries():
         imagePath = request.args.get('image_path', type=str)
         imageType = request.args.get('image_type', type=str)
 
+        print("id",userID)
+        print("name",imageName)
+        print("path",imagePath)
+        print("type",imageType)
+
         # imageName = request.args['image_name']
         # imagePath = request.args['image_path']
         # imageType = request.args['image_type']
@@ -50,11 +55,7 @@ def mysql_queries():
         # return 'success'
 
         return jsonify({
-            'connect': 'success',
-            'id': userID,
-            'name': imageName,
-            'path': imagePath,
-            'type': imageType
+            'connect': 'success'
         })
 @app.route('/see_type', methods=['POST','PUT'])
 def see_type_file():
