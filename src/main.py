@@ -36,7 +36,7 @@ def mysql_queries():
         imagePath = request.form['image_path']
         imageType = request.form['image_type']
 
-        query = `"INSERT INTO activity_images(user_id, img_name, img_path, img_type) VALUES (${userID}, ${imageName}, ${imagePath}, ${imageType})"`
+        query = "INSERT INTO activity_images(user_id, img_name, img_path, img_type) VALUES ("+ userID +", "+ imageName +", "+ imagePath +", "+ imageType} +");"
 
         cur = mysql.connection.cursor()
         cur.execute(query)
