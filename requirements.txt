@@ -7,5 +7,3 @@ werkzeug
 Pillow
 flask-io
 Flask-MySQLdb
-libmysqlclient-dev
-mysql-server
