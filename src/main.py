@@ -31,12 +31,6 @@ def hello_world():
 def mysql_queries():
     if request.method == 'POST':
         
-        # userID = int(request.form['user_id'])
-        # userID = request.args.get('user_id', type=int)
-        # imageName = request.args.get('image_name', type=str)
-        # imagePath = request.args.get('image_path', type=str)
-        # imageType = request.args.get('image_type', type=str)
-
         userID = request.form['user_id']
         imageName = request.form['image_name']
         imagePath = request.form['image_path']
@@ -46,20 +40,16 @@ def mysql_queries():
         print("name",imageName)
         print("path",imagePath)
         print("type",imageType)
-
         
-
-        
-        # cur = mysql.connection.cursor()
-        # cur.execute("INSERT INTO activity_images(user_id, img_name, img_path, img_type) VALUES (%s, %s, %s, %s)", (userID, imageName, imagePath, imageType))
-        # mysql.connection.commit()
-        # cur.close()
-
-        # return 'success'
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO activity_images(user_id, img_name, img_path, img_type) VALUES (%s, %s, %s, %s)", (userID, imageName, imagePath, imageType))
+        mysql.connection.commit()
+        cur.close()
 
         return jsonify({
-            'connect': 'success bro'
+            'connect': 'inserted to mysql'
         })
+        
 @app.route('/see_type', methods=['POST','PUT'])
 def see_type_file():
 
