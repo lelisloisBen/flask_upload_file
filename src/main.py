@@ -32,19 +32,22 @@ def mysql_queries():
     if request.method == 'POST':
         
         # userID = int(request.form['user_id'])
-        userID = request.args.get('user_id', type=int)
-        imageName = request.args.get('image_name', type=str)
-        imagePath = request.args.get('image_path', type=str)
-        imageType = request.args.get('image_type', type=str)
+        # userID = request.args.get('user_id', type=int)
+        # imageName = request.args.get('image_name', type=str)
+        # imagePath = request.args.get('image_path', type=str)
+        # imageType = request.args.get('image_type', type=str)
+
+        userID = request.form['user_id']
+        imageName = request.form['image_name']
+        imagePath = request.form['image_path']
+        imageType = request.form['image_type']
 
         print("id",userID)
         print("name",imageName)
         print("path",imagePath)
         print("type",imageType)
 
-        # imageName = request.args['image_name']
-        # imagePath = request.args['image_path']
-        # imageType = request.args['image_type']
+        
 
         
         # cur = mysql.connection.cursor()
@@ -55,7 +58,7 @@ def mysql_queries():
         # return 'success'
 
         return jsonify({
-            'connect': 'success'
+            'connect': 'success bro'
         })
 @app.route('/see_type', methods=['POST','PUT'])
 def see_type_file():
