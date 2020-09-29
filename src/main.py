@@ -49,7 +49,7 @@ def mysql_queries():
         return jsonify({
             'connect': 'inserted to mysql'
         })
-        
+
 @app.route('/see_type', methods=['POST','PUT'])
 def see_type_file():
 
@@ -171,7 +171,8 @@ def resize_uploaded_img():
 
                 myType = file.content_type
 
-                myClientFolder = "clientFolder"
+                # myClientFolder = "clientFolder"
+                myClientFolder = "activities/air"
 
                 in_mem_file = BytesIO(file.read())
                 image = Image.open(in_mem_file)
