@@ -12,6 +12,7 @@ MYSQL_DB = os.environ.get("DATABASE_MYSQL")
 MYSQL_CURSORCLASS = "DictCursor"
 
 # MAIL_SERVER = 'smtp.gmail.com'
+DEBUG = True
 MAIL_SERVER = 'smtp-relay.gmail.com'
 MAIL_PORT = 25
 MAIL_USERNAME = os.environ.get("EMAIL_USERNAME")
