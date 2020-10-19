@@ -14,11 +14,8 @@ MYSQL_CURSORCLASS = "DictCursor"
 MAILGUN_KEY = os.environ.get("MAILGUN_KEY")
 MAILGUN_DOMAIN = os.environ.get("MAILGUN_DOMAIN")
 
-# MAIL_SERVER = 'smtp.gmail.com'
-DEBUG = True
 MAIL_SERVER = 'smtp.mailgun.org'
 MAIL_PORT = 587
-# DEFAULT_SENDER = os.environ.get("EMAIL_USERNAME")
 MAIL_USERNAME = os.environ.get("EMAIL_USERNAME")
 MAIL_PASSWORD = os.environ.get("EMAIL_PASS")
 
