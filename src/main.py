@@ -8,6 +8,7 @@ from PIL import Image
 from io import BytesIO  
 from flask_mysqldb import MySQL
 from flask_ezmail import Mail
+from flask_ezmail import Message
 
 app = Flask(__name__)
 app.config.from_object("config")
@@ -36,9 +37,15 @@ def send_mail():
         port=app.config['MAIL_PORT'],
         use_tls=True,
         default_sender=app.config['DEFAULT_SENDER'],
-        debug=app.debug,
-        body="Hello samir"
+        debug=app.debug
     )
+    msg = Message(
+        'Test Message',
+        sender=app.config['DEFAULT_SENDER'],
+        recipients=['samirbenzada@gmail.com'],
+        body='Hello samir!',
+    )
+    mail.send(msg)
 
     return jsonify({
             'msg': 'mail sent'
