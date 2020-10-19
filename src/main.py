@@ -7,6 +7,7 @@ from helpers import *
 from PIL import Image
 from io import BytesIO  
 from flask_mysqldb import MySQL
+import requests
 
 app = Flask(__name__)
 app.config.from_object("config")
@@ -29,7 +30,7 @@ def hello_world():
 @app.route('/sendMail')
 def send_mail():
     
-    r = request.post("https://api.mailgun.net/v2/%s/messages" % app.config['MAILGUN_DOMAIN'],
+    requests.post("https://api.mailgun.net/v2/%s/messages" % app.config['MAILGUN_DOMAIN'],
             auth=("api", app.config['MAILGUN_KEY']),
              data={
                  "from": app.config['DEFAULT_SENDER'], 
@@ -38,7 +39,7 @@ def send_mail():
                  "text": "plaintext",
                  "html": "html"
              }
-         )
+        )
 
     return jsonify({
             'msg': 'mail sent'
