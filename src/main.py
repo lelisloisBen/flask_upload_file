@@ -7,21 +7,28 @@ from helpers import *
 from PIL import Image
 from io import BytesIO  
 from flask_mysqldb import MySQL
-from flask_mail import Mail,  Message
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
 app.config.from_object("config")
 
-mail_settings = {
-    "MAIL_SERVER": 'smtp.gmail.com',
-    "MAIL_PORT": 465,
-    "MAIL_USE_TLS": False,
-    "MAIL_USE_SSL": True,
-    "MAIL_USERNAME": os.environ.get("EMAIL_USERNAME"),
-    "MAIL_PASSWORD": os.environ.get("EMAIL_PASS")
-}
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = os.environ.get("EMAIL_USERNAME")
+app.config['MAIL_PASSWORD'] = os.environ.get("EMAIL_PASS")
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
 
-app.config.update(mail_settings)
+# mail_settings = {
+#     "MAIL_SERVER": 'smtp.gmail.com',
+#     "MAIL_PORT": 465,
+#     "MAIL_USE_TLS": False,
+#     "MAIL_USE_SSL": True,
+#     "MAIL_USERNAME": os.environ.get("EMAIL_USERNAME"),
+#     "MAIL_PASSWORD": os.environ.get("EMAIL_PASS")
+# }
+
+# app.config.update(mail_settings)
 
 CORS(app)
 mysql = MySQL(app)
