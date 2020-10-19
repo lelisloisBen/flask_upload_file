@@ -40,6 +40,7 @@ def send_mail():
     mail.send(msg)
 
     return jsonify({
+            'mail_sent': 'success',
             'msg': 'mail sent'
         })
 
