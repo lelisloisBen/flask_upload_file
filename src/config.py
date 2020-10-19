@@ -21,9 +21,6 @@ MAIL_PORT = 587
 # DEFAULT_SENDER = os.environ.get("EMAIL_USERNAME")
 MAIL_USERNAME = os.environ.get("EMAIL_USERNAME")
 MAIL_PASSWORD = os.environ.get("EMAIL_PASS")
-MAIL_USE_TLS = False
-MAIL_USE_SSL = True
-EMAILS_USE_SMTP = True
 
 SECRET_KEY = os.urandom(32)
 DEBUG = True
