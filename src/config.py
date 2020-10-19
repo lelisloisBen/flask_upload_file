@@ -15,6 +15,7 @@ MYSQL_CURSORCLASS = "DictCursor"
 DEBUG = True
 MAIL_SERVER = 'smtp-relay.gmail.com'
 MAIL_PORT = 25
+DEFAULT_SENDER = os.environ.get("EMAIL_USERNAME")
 MAIL_USERNAME = os.environ.get("EMAIL_USERNAME")
 MAIL_PASSWORD = os.environ.get("EMAIL_PASS")
 MAIL_USE_TLS = True

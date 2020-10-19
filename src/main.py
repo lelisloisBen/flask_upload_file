@@ -7,26 +7,13 @@ from helpers import *
 from PIL import Image
 from io import BytesIO  
 from flask_mysqldb import MySQL
-from flask_mail import Mail, Message
+from flask_ezmail import Mail
 
 app = Flask(__name__)
 app.config.from_object("config")
 
-# mail_settings = {
-#     "MAIL_SERVER": 'smtp.gmail.com',
-#     "MAIL_PORT": 465,
-#     "MAIL_USE_TLS": False,
-#     "MAIL_USE_SSL": True,
-#     "MAIL_USERNAME": os.environ.get("EMAIL_USERNAME"),
-#     "MAIL_PASSWORD": os.environ.get("EMAIL_PASS")
-# }
-
-# app.config.update(mail_settings)
-
 CORS(app)
 mysql = MySQL(app)
-mail = Mail(app)
-
 
 # app.config.from_object("flask_s3_upload.config")
 
@@ -42,13 +29,16 @@ def hello_world():
 
 @app.route('/sendMail')
 def send_mail():
-    msg = Message(
-        'Send Mail tutorial!',
-        sender='samirbenzadaweb@gmail.com',
-        recipients=['samirbenzada@gmail.com'],
-        body="Congratulations you've succeeded!"
+    mail = Mail(
+        server=app.config['MAIL_SERVER'],
+        username=app.config['MAIL_USERNAME'],
+        password=app.config['MAIL_PASSWORD'],
+        port=app.config['MAIL_PORT'],
+        use_tls=True,
+        default_sender=app.config['DEFAULT_SENDER'],
+        debug=app.debug,
+        body="Hello samir"
     )
-    mail.send(msg)
 
     return jsonify({
             'msg': 'mail sent'
