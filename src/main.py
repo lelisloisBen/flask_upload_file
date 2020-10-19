@@ -7,12 +7,21 @@ from helpers import *
 from PIL import Image
 from io import BytesIO  
 from flask_mysqldb import MySQL
+from flask_mail import Mail,  Message
 
 app = Flask(__name__)
 app.config.from_object("config")
+app.config.update(
+    MAIL_SERVER = 'smtp.gmail.com'
+    MAIL_PORT = 465
+    MAIL_USE_SSL = True
+    MAIL_USERNAME = os.environ.get("EMAIL_USERNAME")
+    MAIL_PASSWORD = os.environ.get("EMAIL_PASS")
+)
 
 CORS(app)
 mysql = MySQL(app)
+mail = Mail(app)
 
 
 # app.config.from_object("flask_s3_upload.config")
@@ -26,6 +35,16 @@ def handle_invalid_usage(error):
 @app.route('/')
 def hello_world():
     return "<div style='text-align: center; background-color: orange'><h1>Backend running...</h1><br/><h3>Welcome back samir</h3><img src='https://media.gettyimages.com/photos/woman-sitting-by-washing-machine-picture-id117852649?s=2048x2048' width='80%' /></div>"
+
+@app.route('/sendMail')
+def send_mail():
+    msg = mail.send_message(
+        'Send Mail tutorial!',
+        sender='samirbenzadaweb@gmail.com',
+        recipients=['samirbenzada@gmail.com'],
+        body="Congratulations you've succeeded!"
+    )
+    return 'Mail sent'
 
 @app.route('/sql', methods=['POST'])
 def mysql_queries():
