@@ -13,7 +13,7 @@ MYSQL_CURSORCLASS = "DictCursor"
 
 # MAIL_SERVER = 'smtp.gmail.com'
 MAIL_SERVER = 'smtp.googlemail.com'
-MAIL_PORT = 587
+MAIL_PORT = 465
 MAIL_USERNAME = os.environ.get("EMAIL_USERNAME")
 MAIL_PASSWORD = os.environ.get("EMAIL_PASS")
 MAIL_USE_TLS = False
