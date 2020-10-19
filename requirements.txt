@@ -7,5 +7,4 @@ werkzeug
 Pillow
 flask-io
 Flask-MySQLdb
-flask-ezmail
-requests
+Flask-Mail

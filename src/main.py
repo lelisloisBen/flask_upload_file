@@ -7,13 +7,15 @@ from helpers import *
 from PIL import Image
 from io import BytesIO  
 from flask_mysqldb import MySQL
-import requests
+from flask_mail import Mail, Message
 
 app = Flask(__name__)
 app.config.from_object("config")
 
 CORS(app)
 mysql = MySQL(app)
+mail = Mail(app)
+
 
 # app.config.from_object("flask_s3_upload.config")
 
@@ -29,21 +31,17 @@ def hello_world():
 
 @app.route('/sendMail')
 def send_mail():
-    
-    r = requests.post("https://api.mailgun.net/v2/%s/messages" % app.config['MAILGUN_DOMAIN'],
-            auth=("api", app.config['MAILGUN_KEY']),
-             data={
-                 "from": app.config['DEFAULT_SENDER'], 
-                 "to": "samirbenzada@gmail.com",
-                 "subject": "test from mailgun",
-                 "text": "plaintext",
-                 "html": "html"
-             }
-        )
-    return r
-    # return jsonify({
-    #         'msg': 'mail sent'
-    #     })
+    msg = Message(
+        'Send Mail tutorial!',
+        sender='samirbenzadaweb@gmail.com',
+        recipients=['samirbenzada@gmail.com'],
+        body="Congratulations you've succeeded!"
+    )
+    mail.send(msg)
+
+    return jsonify({
+            'msg': 'mail sent'
+        })
 
 @app.route('/sql', methods=['POST'])
 def mysql_queries():
