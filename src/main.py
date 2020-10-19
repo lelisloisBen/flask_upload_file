@@ -12,13 +12,6 @@ from flask_mail import Mail, Message
 app = Flask(__name__)
 app.config.from_object("config")
 
-# app.config['MAIL_SERVER']='smtp.gmail.com'
-# app.config['MAIL_PORT'] = 465
-# app.config['MAIL_USERNAME'] = os.environ.get("EMAIL_USERNAME")
-# app.config['MAIL_PASSWORD'] = os.environ.get("EMAIL_PASS")
-# app.config['MAIL_USE_TLS'] = False
-# app.config['MAIL_USE_SSL'] = True
-
 # mail_settings = {
 #     "MAIL_SERVER": 'smtp.gmail.com',
 #     "MAIL_PORT": 465,
@@ -32,7 +25,7 @@ app.config.from_object("config")
 
 CORS(app)
 mysql = MySQL(app)
-# mail = Mail(app)
+mail = Mail(app)
 
 
 # app.config.from_object("flask_s3_upload.config")
@@ -49,20 +42,16 @@ def hello_world():
 
 @app.route('/sendMail')
 def send_mail():
-    user = os.environ.get("EMAIL_USERNAME")
-    passw = os.environ.get("EMAIL_PASS")
-    # msg = Message(
-    #     'Send Mail tutorial!',
-    #     sender='samirbenzadaweb@gmail.com',
-    #     recipients=['samirbenzada@gmail.com'],
-    #     body="Congratulations you've succeeded!"
-    # )
-    # mail.send(msg)
+    msg = Message(
+        'Send Mail tutorial!',
+        sender='samirbenzadaweb@gmail.com',
+        recipients=['samirbenzada@gmail.com'],
+        body="Congratulations you've succeeded!"
+    )
+    mail.send(msg)
 
     return jsonify({
-            'msg': 'mail sent',
-            'user': user,
-            'pass': passw
+            'msg': 'mail sent'
         })
 
 @app.route('/sql', methods=['POST'])

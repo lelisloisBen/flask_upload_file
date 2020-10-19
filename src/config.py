@@ -11,6 +11,13 @@ MYSQL_PASSWORD = os.environ.get("PASS_MYSQL")
 MYSQL_DB = os.environ.get("DATABASE_MYSQL")
 MYSQL_CURSORCLASS = "DictCursor"
 
+MAIL_SERVER = 'smtp.gmail.com'
+MAIL_PORT = 465
+MAIL_USERNAME = os.environ.get("EMAIL_USERNAME")
+MAIL_PASSWORD = os.environ.get("EMAIL_PASS")
+MAIL_USE_TLS = False
+MAIL_USE_SSL = True
+
 SECRET_KEY = os.urandom(32)
 DEBUG = True
 PORT = 5000
