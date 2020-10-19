@@ -11,6 +11,15 @@ MYSQL_PASSWORD = os.environ.get("PASS_MYSQL")
 MYSQL_DB = os.environ.get("DATABASE_MYSQL")
 MYSQL_CURSORCLASS = "DictCursor"
 
+app.config['MAILGUN_KEY'] = 'YOUR-KEY-HERE'
+app.config['MAILGUN_DOMAIN'] = 'YOUR-MAILGUN-DOMAIN'
+
+
+
+
+MAILGUN_KEY = os.environ.get("MAILGUN_KEY")
+MAILGUN_DOMAIN = os.environ.get("MAILGUN_DOMAIN")
+
 # MAIL_SERVER = 'smtp.gmail.com'
 DEBUG = True
 MAIL_SERVER = 'smtp-relay.gmail.com'

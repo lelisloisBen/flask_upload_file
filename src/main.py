@@ -7,8 +7,6 @@ from helpers import *
 from PIL import Image
 from io import BytesIO  
 from flask_mysqldb import MySQL
-from flask_ezmail import Mail
-from flask_ezmail import Message
 
 app = Flask(__name__)
 app.config.from_object("config")
@@ -30,22 +28,17 @@ def hello_world():
 
 @app.route('/sendMail')
 def send_mail():
-    mail = Mail(
-        server=app.config['MAIL_SERVER'],
-        username=app.config['MAIL_USERNAME'],
-        password=app.config['MAIL_PASSWORD'],
-        port=app.config['MAIL_PORT'],
-        use_tls=True,
-        default_sender=app.config['DEFAULT_SENDER'],
-        debug=app.debug
-    )
-    msg = Message(
-        'Test Message',
-        sender=app.config['DEFAULT_SENDER'],
-        recipients=['samirbenzada@gmail.com'],
-        body='Hello samir!',
-    )
-    mail.send(msg)
+    
+    r = request.post("https://api.mailgun.net/v2/%s/messages" % app.config['MAILGUN_DOMAIN'],
+            auth=("api", app.config['MAILGUN_KEY']),
+             data={
+                 "from": app.config['DEFAULT_SENDER'], 
+                 "to": "samirbenzada@gmail.com",
+                 "subject": "test from mailgun",
+                 "text": "plaintext",
+                 "html": "html"
+             }
+         )
 
     return jsonify({
             'msg': 'mail sent'
