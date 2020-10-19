@@ -35,14 +35,12 @@ def send_mail():
         'message for the company!',
         sender='samirbenzadaweb@gmail.com',
         recipients=['samirbenzada@gmail.com'],
-        subject="test mess for company",
         body="message for the company"
     )
     msg2 = Message(
         'Message for the client!',
         sender='samirbenzadaweb@gmail.com',
         recipients=['samirbenzada@gmail.com'],
-        subject="test mess for client",
         body="Message for the client"
     )
     msg = list(msg1, msg2)
