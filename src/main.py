@@ -12,8 +12,8 @@ from flask_mail import Mail,  Message
 app = Flask(__name__)
 app.config.from_object("config")
 app.config.update(
-    MAIL_SERVER = 'smtp.gmail.com',
-    MAIL_PORT = 465,
+    MAIL_SERVER = 'imap.gmail.com',
+    MAIL_PORT = 993,
     MAIL_USE_SSL = True,
     MAIL_USERNAME = os.environ.get("EMAIL_USERNAME"),
     MAIL_PASSWORD = os.environ.get("EMAIL_PASS")
