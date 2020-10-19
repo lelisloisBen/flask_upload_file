@@ -31,7 +31,7 @@ def hello_world():
 
 @app.route('/sendMail')
 def send_mail():
-    msg = Message(
+    msg1 = Message(
         'message for the company!',
         sender='samirbenzadaweb@gmail.com',
         recipients=['samirbenzada@gmail.com'],
@@ -45,8 +45,9 @@ def send_mail():
         subject="test mess for client",
         body="Message for the client"
     )
-    mail.send(msg, msg2)
-
+    msg = list(msg1, msg2)
+    for mess in msg:
+        mail.send(mess)
 
     return jsonify({
             'mail_sent': 'success',
