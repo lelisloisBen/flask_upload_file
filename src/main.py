@@ -43,7 +43,7 @@ def send_mail():
         recipients=['samirbenzada@gmail.com'],
         body="Message for the client"
     )
-    msg = list(msg1, msg2)
+    msg = [msg1, msg2]
     for mess in msg:
         mail.send(mess)
 
