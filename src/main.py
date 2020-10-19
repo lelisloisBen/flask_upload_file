@@ -30,7 +30,7 @@ def hello_world():
 @app.route('/sendMail')
 def send_mail():
     
-    requests.post("https://api.mailgun.net/v2/%s/messages" % app.config['MAILGUN_DOMAIN'],
+    r = requests.post("https://api.mailgun.net/v2/%s/messages" % app.config['MAILGUN_DOMAIN'],
             auth=("api", app.config['MAILGUN_KEY']),
              data={
                  "from": app.config['DEFAULT_SENDER'], 
@@ -40,10 +40,10 @@ def send_mail():
                  "html": "html"
              }
         )
-
-    return jsonify({
-            'msg': 'mail sent'
-        })
+    return r
+    # return jsonify({
+    #         'msg': 'mail sent'
+    #     })
 
 @app.route('/sql', methods=['POST'])
 def mysql_queries():
