@@ -38,13 +38,17 @@ def hello_world():
 
 @app.route('/sendMail')
 def send_mail():
-    msg = mail.send_message(
+    msg = Message(
         'Send Mail tutorial!',
         sender='samirbenzadaweb@gmail.com',
         recipients=['samirbenzada@gmail.com'],
         body="Congratulations you've succeeded!"
     )
-    return 'Mail sent'
+    mail.send(msg)
+
+    return jsonify({
+            'msg': 'mail sent'
+        })
 
 @app.route('/sql', methods=['POST'])
 def mysql_queries():
