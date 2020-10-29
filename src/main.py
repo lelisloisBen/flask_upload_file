@@ -33,14 +33,14 @@ def hello_world():
 def send_mail():
     msg1 = Message(
         'message for the company!',
-        sender='samir.benzada@Amgen.com',
-        recipients=['samirbenzada@gmail.com'],
+        sender='samirbenzada@gmail.com',
+        recipients=['eric.montufar@gmail.com'],
         body="message for the company"
     )
     msg2 = Message(
         'Message for the client!',
-        sender='samir.benzada@Amgen.com',
-        recipients=['samirbenzada@yahoo.fr'],
+        sender='samirbenzada@gmail.com',
+        recipients=['bourjoisbj@yahoo.fr'],
         body="Message for the client"
     )
     msg = [msg1, msg2]
