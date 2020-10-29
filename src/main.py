@@ -39,7 +39,7 @@ def send_mail():
     )
     msg2 = Message(
         'Message for the client!',
-        sender='samirbenzada@gmail.com',
+        sender='samir.benzada@datavault.com',
         recipients=['samirbenzada@gmail.com'],
         body="Message for the client"
     )
