@@ -33,7 +33,7 @@ def hello_world():
 def send_mail():
     msg1 = Message(
         'message for the company!',
-        sender='samir.benzada@amgen.com',
+        sender='benzada.samir@freddiemac.com',
         recipients=['samirbenzada@gmail.com'],
         body="message for the company"
     )
